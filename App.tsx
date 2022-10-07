@@ -19,7 +19,7 @@ import {
   Image,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import CalendarModule from './CalendarModule';
+// import CalendarModule from './CalendarModule';
 import TranscoderModule from './TranscoderModule';
 import {launchImageLibrary} from 'react-native-image-picker';
 
@@ -43,16 +43,15 @@ const App = () => {
         const path = response.assets[0].uri;
         console.log('selected video: ', path);
         if (path) {
-          await TranscoderModule.compressVideo(
-            "compressVideo",
+          TranscoderModule.compressVideo(
+            'compressVideo',
             path,
             6,
             false,
             0,
             24,
-            (json: string | null) => console.log(json)
+            (result: string | null) => console.log('💛', result),
           );
-          console.log("helllll")
           // TranscoderModule.getFileThumbnail(
           //   "getFileThumbnail",
           //   path,
