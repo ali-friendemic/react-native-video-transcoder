@@ -21,7 +21,7 @@ import {
   View,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import CalendarModule from './CalendarModule';
+// import CalendarModule from './CalendarModule';
 import TranscoderModule from './TranscoderModule';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Video from 'react-native-video';
@@ -131,7 +131,7 @@ const App = () => {
         },
       );
 
-      await TranscoderModule.compressVideo(
+      TranscoderModule.compressVideo(
         'compressVideo',
         videoPath,
         parseInt(value),
