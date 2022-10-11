@@ -40,25 +40,26 @@ public class TranscoderModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getByteThumbnail(String path, Integer quality, Callback result) {
+    public void getByteThumbnail(String name, String path, Integer quality, Callback result) {
         byte[] thumbnailByteArray = thumbnailUtility.getByteThumbnail(path, quality, _context);
         result.invoke(thumbnailByteArray);
     }
 
     @ReactMethod
-    public void getFileThumbnail(String path, Integer quality, Callback result) {
+    public void getFileThumbnail(String name, String path, Integer quality, Callback result) {
         String thumbnail = thumbnailUtility.getFileThumbnail(path, quality, _context);
         result.invoke(thumbnail);
     }
 
     @ReactMethod
-    public void cancelCompression(Callback result) {
+    public void cancelCompression(String name, Callback result) {
         transcodeFuture.cancel(true);
         result.invoke(false);
     }
 
     @ReactMethod
     public void compressVideo(
+            String name,
             String path,
             Integer quality,
             Boolean deleteOrigin,
@@ -105,7 +106,7 @@ public class TranscoderModule extends ReactContextBaseJavaModule {
                 videoTrackStrategy = DefaultVideoStrategy.atMost(1080, 1920).build();
                 break;
             default:
-                videoTrackStrategy = DefaultVideoStrategy.atMost(360).build();
+                videoTrackStrategy = DefaultVideoStrategy.atMost(720).build();
         }
 
         if (includeAudio) {

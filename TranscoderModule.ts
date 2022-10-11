@@ -9,6 +9,7 @@ import {NativeModules} from 'react-native';
 const {TranscoderModule} = NativeModules;
 interface TranscoderInterface {
   getByteThumbnail(
+    name: string,
     path: string,
     quality: number,
     callback?: (path: string) => void,
@@ -25,7 +26,8 @@ interface TranscoderInterface {
     path: string,
     quality: Number,
     deleteOrigin: Boolean,
-    startTime: Number,
+    includeAudio?: Boolean,
+    startTime?: Number,
     frameRate?: Number,
     callback?: (json: string | null) => void,
   ): void;
