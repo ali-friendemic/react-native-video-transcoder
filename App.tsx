@@ -19,6 +19,7 @@ import {
   Image,
   Text,
   View,
+  Platform
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 // import CalendarModule from './CalendarModule';
@@ -56,6 +57,7 @@ const DetailItem = (props: IDetailItem) => {
 };
 
 const App = () => {
+  const isIOS = Platform.OS === "ios"
   const isDarkMode = useColorScheme() === 'dark';
   const [thumbnail, setThumbnail] = React.useState('');
   const [video, setVideo] = React.useState('');
@@ -147,7 +149,7 @@ const App = () => {
               setVideo(data.path);
               setHeight(data.height);
               setWidth(data.width);
-              const toKB = data.fileSize / 1000;
+              const toKB = isIOS ? data.filesize / 1000 : data.fileSize / 1000;
               const toMB = toKB / 1000;
               setCompressedSize(toMB);
             }
