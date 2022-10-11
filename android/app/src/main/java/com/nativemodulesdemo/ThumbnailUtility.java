@@ -5,6 +5,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ThumbnailUtility {
     Utility utility = new Utility();
@@ -22,9 +24,10 @@ public class ThumbnailUtility {
         try {
             Bitmap bmp = utility.getBitmap(path, -1L, context);
             if (bmp != null) {
-                File dir = context.getExternalFilesDir("nativemodulesdemo");
-                if (dir != null && !dir.exists()) dir.mkdirs();
-                File file = new File(dir, "thumbnail.png");
+                String dir = context.getExternalFilesDir("nativemodulesdemo").getAbsolutePath();
+                String out = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").format(new Date());
+                String destPath = dir + File.separator + "IMG_" + out + path.hashCode() + ".png";
+                File file = new File(destPath);
 
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, quality, bos);
